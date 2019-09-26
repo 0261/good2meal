@@ -7,3 +7,11 @@
 # BACKGROUND
 
 매 점심마다 뭐 먹지를 항상 고민하는데, 음식점 찾기는 귀찮고. 매번 같은 음식을 먹는 건 싫고.. 최소한의 노력으로 최대의 효과를 찾기 위해 시작
+
+# Client
+
+[클라이언트](https://github.com/0261/good2meal/tree/master/fe)
+
+# Server
+
+[서버](https://github.com/0261/good2meal/tree/master/be)
