@@ -41,7 +41,6 @@
         "webpack-merge": "^4.2.2"
     },
     "dependencies": {
-        "core-js": "^3.2.1",
         "immer": "^4.0.0",
         "react": "^16.9.0",
         "react-dom": "^16.9.0",
