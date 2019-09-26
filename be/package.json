@@ -1,0 +1,47 @@
+{
+    "name": "be",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "nodemon ."
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@types/body-parser": "^1.17.0",
+        "@types/cors": "^2.8.5",
+        "@types/express": "^4.17.0",
+        "@types/graphql": "^14.5.0",
+        "@types/helmet": "0.0.43",
+        "@types/jest": "^24.0.18",
+        "@types/morgan": "^1.7.36",
+        "@types/node": "^12.7.8",
+        "@types/webpack-node-externals": "^1.6.3",
+        "apollo-server-express": "^2.7.2",
+        "jest": "^24.9.0",
+        "nodemon": "^1.19.2",
+        "ts-jest": "^24.1.0",
+        "ts-loader": "^6.0.4",
+        "ts-node": "^8.4.1",
+        "tslint": "^5.20.0",
+        "typada-lint-rules": "^1.0.1",
+        "typescript": "^3.6.3",
+        "webpack": "^4.38.0",
+        "webpack-cli": "^3.3.6",
+        "webpack-node-externals": "^1.7.2"
+    },
+    "dependencies": {
+        "express": "^4.17.1",
+        "graphql": "^14.5.8",
+        "reflect-metadata": "^0.1.13",
+        "type-graphql": "^0.17.5",
+        "typedi": "^0.8.0",
+        "cors": "^2.8.5",
+        "body-parser": "^1.19.0",
+        "helmet": "^3.20.0",
+        "moment": "^2.24.0",
+        "morgan": "^1.9.1"
+    }
+}
