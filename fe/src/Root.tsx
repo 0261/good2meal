@@ -11,7 +11,7 @@ const Root: React.FC = () => {
     return (
         <BrowserRouter>
             <Layout>
-                <Header className='root-logo'>Good2Meal</Header>
+                <Header className='root-logo'></Header>
                 <Content className='root-content'>
                     <App></App>
                 </Content>
