@@ -1,0 +1,21 @@
+.TagBox {
+    overflow: scroll;
+    white-space: nowrap;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.Tag {
+    font-size: 14px;
+    font-weight: 400;
+    vertical-align: middle;
+    display: table-cell;
+    text-align: center;
+    height: 4vmax;
+    width: 4vmax;
+    margin: 3px;
+}
+
+.TagWrap {
+    margin-right: 4px;
+}
