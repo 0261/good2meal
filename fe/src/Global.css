@@ -6,6 +6,6 @@
     background: #fff;
     padding: 12px;
     height: 100vmax;
-}
-.root-footer {
+    display: flex;
+    flex-direction: column;
 }

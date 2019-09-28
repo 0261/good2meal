@@ -15,7 +15,6 @@ const Root: React.FC = () => {
                 <Content className='root-content'>
                     <App></App>
                 </Content>
-                <Footer className='root-footer'>Footer</Footer>
             </Layout>
         </BrowserRouter>
     );
