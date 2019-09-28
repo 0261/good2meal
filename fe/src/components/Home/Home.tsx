@@ -1,25 +1,37 @@
 import React from 'react';
-import { Row, Col } from 'antd';
+import { Row, Col, Card, Affix, Button } from 'antd';
 
 import SearchBox from '../SearchBox/SearchBox';
 import TagBox from '../TagBox/TagBox';
+import Meta from 'antd/lib/card/Meta';
+
+import styles from './Home.scss';
+
+const testCards = new Array(20).fill(true).map((d, i) => (
+    <Card
+        className={styles.Card}
+        key={i}
+        hoverable
+        cover={
+            <img
+                alt='example'
+                src='https://via.placeholder.com/300.png/09f/fff'
+            />
+        }
+    >
+        <Meta title='테스트' description='테스트 카드' />
+    </Card>
+));
 
 const Home = () => {
     return (
         <div>
             <SearchBox></SearchBox>
             <TagBox></TagBox>
-            <Row>
-                <Col xs={2} sm={4} md={6} lg={8} xl={10}>
-                    col
-                </Col>
-                <Col xs={20} sm={16} md={12} lg={8} xl={4}>
-                    col
-                </Col>
-                <Col xs={2} sm={4} md={6} lg={8} xl={10}>
-                    col
-                </Col>
-            </Row>
+            <div className={styles.Home}>{testCards}</div>
+            <Affix offsetBottom={10}>
+                <Button type='primary'>테스트 스티키 푸터</Button>
+            </Affix>
         </div>
     );
 };
