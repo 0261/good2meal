@@ -1,12 +1,12 @@
 import React from 'react';
 import { Switch, Route } from 'react-router';
 
-import Home from './Home/Home';
+import HomeContainer from '../containers/Home/Home';
 
 function App() {
     return (
         <Switch>
-            <Route exact path='/' component={Home} />
+            <Route exact path='/' component={HomeContainer} />
         </Switch>
     );
 }

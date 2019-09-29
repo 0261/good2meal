@@ -3,21 +3,11 @@ import { Tag, Row, Skeleton } from 'antd';
 
 import styles from './TagBox.scss';
 
-const tags = [
-    'magenta',
-    'red',
-    'volcano',
-    'orange',
-    'gold',
-    'lime',
-    'green',
-    'cyan',
-    'blue',
-    'geekblue',
-    'purple',
-];
+interface Props {
+    tags: Array<string>;
+}
 
-const TagBox: React.FC = () => {
+const TagBox: React.FC<Props> = ({ tags }) => {
     const [loading, setLoading] = useState(true);
 
     new Promise(resolve => setTimeout(resolve, 700)).then(() =>
@@ -25,8 +15,8 @@ const TagBox: React.FC = () => {
     );
     const onTagSearch = useCallback(
         (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
-            const color = event.currentTarget.innerText;
-            console.log(color);
+            const tagName = event.currentTarget.innerText;
+            console.log(tagName);
         },
         [],
     );
