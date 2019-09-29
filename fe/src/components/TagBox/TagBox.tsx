@@ -1,5 +1,5 @@
-import React, { useCallback } from 'react';
-import { Tag, Row } from 'antd';
+import React, { useCallback, useState } from 'react';
+import { Tag, Row, Skeleton } from 'antd';
 
 import styles from './TagBox.scss';
 
@@ -18,6 +18,11 @@ const tags = [
 ];
 
 const TagBox: React.FC = () => {
+    const [loading, setLoading] = useState(true);
+
+    new Promise(resolve => setTimeout(resolve, 700)).then(() =>
+        setLoading(false),
+    );
     const onTagSearch = useCallback(
         (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
             const color = event.currentTarget.innerText;
@@ -32,7 +37,11 @@ const TagBox: React.FC = () => {
             </Tag>
         </span>
     ));
-    return <Row className={styles.TagBox}>{testTags}</Row>;
+    return (
+        <Skeleton loading={loading} paragraph={{ rows: 0 }} active>
+            <Row className={styles.TagBox}>{testTags}</Row>
+        </Skeleton>
+    );
 };
 
 export default TagBox;
