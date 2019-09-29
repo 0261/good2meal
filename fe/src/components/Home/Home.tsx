@@ -1,48 +1,57 @@
 import React, { useState } from 'react';
 import { Row, Col, Card, Affix, Button, Skeleton, Icon } from 'antd';
 
-import SearchBox from '../SearchBox/SearchBox';
-import TagBox from '../TagBox/TagBox';
+import SearchBoxContainer from '../../containers/SearchBox/SearchBox';
+import TagBoxContainer from '../../containers/TagBox/TagBox';
 import Meta from 'antd/lib/card/Meta';
 
 import styles from './Home.scss';
 
-const Home = () => {
+interface Restaurant {
+    imgUrl: string;
+    alt: string;
+    title: string;
+    desc: string;
+}
+interface Props {
+    restaurants: Array<Restaurant>;
+}
+
+const Home: React.FC<Props> = ({ restaurants }) => {
     const [loading, setLoading] = useState(true);
 
     new Promise(resolve => setTimeout(resolve, 1500)).then(() =>
         setLoading(false),
     );
 
-    const testCards = new Array(20).fill(true).map((d, i) => (
+    const restaurant = restaurants.map((restaurant, index) => (
         <Card
             className={styles.Card}
-            key={i}
-            hoverable
+            key={index}
             cover={
                 <Skeleton
                     loading={loading}
                     paragraph={{ rows: 0 }}
-                    avatar={{ size: 'large' }}
+                    avatar
                     active
                 >
-                    <img
-                        alt='example'
-                        src='https://via.placeholder.com/300.png/09f/fff'
-                    />
+                    <img alt={restaurant.alt} src={restaurant.imgUrl} />
                 </Skeleton>
             }
         >
             <Skeleton loading={loading} active>
-                <Meta title='테스트' description='테스트 카드' />
+                <Meta
+                    title={restaurant.title}
+                    description={`${restaurant.desc} ${index + 1}`}
+                />
             </Skeleton>
         </Card>
     ));
     return (
         <div>
-            <SearchBox></SearchBox>
-            <TagBox></TagBox>
-            <div className={styles.Home}>{testCards}</div>
+            <SearchBoxContainer />
+            <TagBoxContainer />
+            <div className={styles.Home}>{restaurant}</div>
             <div className={styles.Affix}>
                 <Affix offsetBottom={10}>
                     <Icon
@@ -50,7 +59,7 @@ const Home = () => {
                         onClick={() => setLoading(true)}
                         type='sync'
                         spin={loading}
-                    ></Icon>
+                    />
                 </Affix>
             </div>
         </div>

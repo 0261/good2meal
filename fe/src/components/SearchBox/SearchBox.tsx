@@ -3,15 +3,11 @@ import { Input, Icon, Row } from 'antd';
 
 import styles from './SearchBox.scss';
 
-const SearchBox = () => {
-    const onInputSearch = useCallback(
-        (event: React.KeyboardEvent<HTMLInputElement>) => {
-            const input = event.currentTarget.value;
-            console.log(input);
-        },
-        [],
-    );
+interface Props {
+    onInputSearch: (event: React.KeyboardEvent<HTMLInputElement>) => void;
+}
 
+const SearchBox: React.FC<Props> = ({ onInputSearch }) => {
     return (
         <Row>
             <Input
