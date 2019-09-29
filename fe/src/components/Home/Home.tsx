@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Row, Col, Card, Affix, Button, Skeleton } from 'antd';
+import { Row, Col, Card, Affix, Button, Skeleton, Icon } from 'antd';
 
 import SearchBox from '../SearchBox/SearchBox';
 import TagBox from '../TagBox/TagBox';
@@ -20,7 +20,12 @@ const Home = () => {
             key={i}
             hoverable
             cover={
-                <Skeleton loading={loading} avatar={{ size: 'large' }} active>
+                <Skeleton
+                    loading={loading}
+                    paragraph={{ rows: 0 }}
+                    avatar={{ size: 'large' }}
+                    active
+                >
                     <img
                         alt='example'
                         src='https://via.placeholder.com/300.png/09f/fff'
@@ -38,9 +43,16 @@ const Home = () => {
             <SearchBox></SearchBox>
             <TagBox></TagBox>
             <div className={styles.Home}>{testCards}</div>
-            <Affix offsetBottom={10}>
-                <Button type='primary'>테스트 스티키 푸터</Button>
-            </Affix>
+            <div className={styles.Affix}>
+                <Affix offsetBottom={10}>
+                    <Icon
+                        style={{ fontSize: '1.3rem', color: 'black' }}
+                        onClick={() => setLoading(true)}
+                        type='sync'
+                        spin={loading}
+                    ></Icon>
+                </Affix>
+            </div>
         </div>
     );
 };
