@@ -46,7 +46,7 @@ const Home = () => {
             <div className={styles.Affix}>
                 <Affix offsetBottom={10}>
                     <Icon
-                        style={{ fontSize: '1.3rem', color: 'black' }}
+                        className={styles.SyncIcon}
                         onClick={() => setLoading(true)}
                         type='sync'
                         spin={loading}
