@@ -5,23 +5,24 @@ import styles from './TagBox.scss';
 
 interface Props {
     tags: Array<string>;
+    onTagSearch: (tagName: string) => void;
 }
 
-const TagBox: React.FC<Props> = ({ tags }) => {
+const TagBox: React.FC<Props> = ({ tags, onTagSearch }) => {
     const [loading, setLoading] = useState(true);
 
     new Promise(resolve => setTimeout(resolve, 700)).then(() =>
         setLoading(false),
     );
-    const onTagSearch = useCallback(
+    const onSearch = useCallback(
         (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
             const tagName = event.currentTarget.innerText;
-            console.log(tagName);
+            onTagSearch(tagName);
         },
         [],
     );
     const testTags = tags.map((tag, i) => (
-        <span className={styles.TagWrap} key={i} onClick={onTagSearch}>
+        <span className={styles.TagWrap} key={i} onClick={onSearch}>
             <Tag className={styles.Tag} color={tag}>
                 {tag}
             </Tag>
