@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Row, Col, Card, Affix, Button, Skeleton, Icon } from 'antd';
 
 import SearchBoxContainer from '../../containers/SearchBox/SearchBox';
@@ -14,16 +14,20 @@ interface Restaurant {
     desc: string;
 }
 interface Props {
+    loading: boolean;
+    onLoading: (loading: boolean) => void;
     restaurants: Array<Restaurant>;
+    onSearch: (event: React.KeyboardEvent<HTMLInputElement>) => void;
+    onTagSearch: (tagName: string) => void;
 }
 
-const Home: React.FC<Props> = ({ restaurants }) => {
-    const [loading, setLoading] = useState(true);
-
-    new Promise(resolve => setTimeout(resolve, 1500)).then(() =>
-        setLoading(false),
-    );
-
+const Home: React.FC<Props> = ({
+    restaurants,
+    onSearch,
+    loading,
+    onLoading,
+    onTagSearch,
+}) => {
     const restaurant = restaurants.map((restaurant, index) => (
         <Card
             className={styles.Card}
@@ -49,14 +53,14 @@ const Home: React.FC<Props> = ({ restaurants }) => {
     ));
     return (
         <div>
-            <SearchBoxContainer />
-            <TagBoxContainer />
+            <SearchBoxContainer onSearch={onSearch} />
+            <TagBoxContainer onTagSearch={onTagSearch} />
             <div className={styles.Home}>{restaurant}</div>
             <div className={styles.Affix}>
                 <Affix offsetBottom={10}>
                     <Icon
                         className={styles.SyncIcon}
-                        onClick={() => setLoading(true)}
+                        onClick={() => onLoading(true)}
                         type='sync'
                         spin={loading}
                     />
