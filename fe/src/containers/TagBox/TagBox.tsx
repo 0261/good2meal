@@ -17,10 +17,12 @@ const tags = [
 ];
 
 interface State {}
-interface Props {}
+interface Props {
+    onTagSearch: (tagName: string) => void;
+}
 
-export default class TagBox extends Component<State, Props> {
+export default class TagBox extends Component<Props, State> {
     render() {
-        return <TagBoxComponent tags={tags} />;
+        return <TagBoxComponent onTagSearch={this.props.onTagSearch} tags={tags} />;
     }
 }

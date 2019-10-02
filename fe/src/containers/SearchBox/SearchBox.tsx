@@ -3,15 +3,12 @@ import React, { Component } from 'react';
 import SearchBoxComponent from '../../components/SearchBox/SearchBox';
 
 interface State {}
-interface Props {}
+interface Props {
+    onSearch: (event: React.KeyboardEvent<HTMLInputElement>) => void;
+}
 
-export default class SearchBox extends Component<State, Props> {
-    onInputSearch(event: React.KeyboardEvent<HTMLInputElement>) {
-        const input = event.currentTarget.value;
-        console.log(input);
-    }
-
+export default class SearchBox extends Component<Props, State> {
     render() {
-        return <SearchBoxComponent onInputSearch={this.onInputSearch} />;
+        return <SearchBoxComponent onInputSearch={this.props.onSearch} />;
     }
 }
