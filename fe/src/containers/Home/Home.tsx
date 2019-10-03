@@ -30,12 +30,9 @@ class Home extends Component<Props, State> {
         this.state = {
             loading: true,
         };
-        this.onInputSearch = this.onInputSearch.bind(this);
-        this.onLoading = this.onLoading.bind(this);
-        this.onTagSearch = this.onTagSearch.bind(this);
     }
 
-    onLoading(loading: boolean) {
+    onLoading = (loading: boolean) => {
         this.setState({ loading });
         new Promise(resolve => setTimeout(resolve, 800)).then(() => {
             this.props.restaurantSearch({});
@@ -45,14 +42,14 @@ class Home extends Component<Props, State> {
         });
     }
 
-    onInputSearch(event: React.KeyboardEvent<HTMLInputElement>) {
+    onInputSearch = (event: React.KeyboardEvent<HTMLInputElement>) => {
         const input = event.currentTarget.value;
         this.props.restaurantSearch({
             filter: input,
         });
     }
 
-    onTagSearch(tagName: string) {
+    onTagSearch = (tagName: string) => {
         this.props.restaurantSearch({
             filter: tagName,
         });
