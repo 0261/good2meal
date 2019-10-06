@@ -15,7 +15,7 @@ interface Search {
     lastKey?: string | number;
     filter?: string;
 }
-export const retaurantSearch = (searchParams: Search) => ({
+export const restaurantSearch = (searchParams: Search) => ({
     type: RESTAURANT_SEARCH,
     payload: {
         ...searchParams,
