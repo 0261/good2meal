@@ -3,6 +3,8 @@ import { Row, Col, Card, Affix, Button, Skeleton, Icon } from 'antd';
 
 import SearchBoxContainer from '../../containers/SearchBox/SearchBox';
 import TagBoxContainer from '../../containers/TagBox/TagBox';
+import Hook from '../../containers/Home/Home';
+
 import Meta from 'antd/lib/card/Meta';
 
 import styles from './Home.scss';
@@ -17,8 +19,9 @@ interface Props {
     loading: boolean;
     onLoading: (loading: boolean) => void;
     restaurants: Array<Restaurant>;
+    tags: Array<string>;
     onSearch: (event: React.KeyboardEvent<HTMLInputElement>) => void;
-    onTagSearch: (tagName: string) => void;
+    onTagSearch: (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void;
 }
 
 const Home: React.FC<Props> = ({
@@ -27,6 +30,7 @@ const Home: React.FC<Props> = ({
     loading,
     onLoading,
     onTagSearch,
+    tags,
 }) => {
     const restaurant = restaurants.map((restaurant, index) => (
         <Card
@@ -54,7 +58,7 @@ const Home: React.FC<Props> = ({
     return (
         <div>
             <SearchBoxContainer onSearch={onSearch} />
-            <TagBoxContainer onTagSearch={onTagSearch} />
+            <TagBoxContainer tags={tags} onTagSearch={onTagSearch} />
             <div className={styles.Home}>{restaurant}</div>
             <div className={styles.Affix}>
                 <Affix offsetBottom={10}>

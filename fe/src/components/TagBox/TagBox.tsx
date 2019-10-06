@@ -5,7 +5,7 @@ import styles from './TagBox.scss';
 
 interface Props {
     tags: Array<string>;
-    onTagSearch: (tagName: string) => void;
+    onTagSearch: (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void;
 }
 
 const TagBox: React.FC<Props> = ({ tags, onTagSearch }) => {
@@ -14,15 +14,8 @@ const TagBox: React.FC<Props> = ({ tags, onTagSearch }) => {
     new Promise(resolve => setTimeout(resolve, 700)).then(() =>
         setLoading(false),
     );
-    const onSearch = useCallback(
-        (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
-            const tagName = event.currentTarget.innerText;
-            onTagSearch(tagName);
-        },
-        [],
-    );
-    const testTags = tags.map((tag, i) => (
-        <span className={styles.TagWrap} key={i} onClick={onSearch}>
+    const tag = tags.map((tag, i) => (
+        <span className={styles.TagWrap} key={i} onClick={e => onTagSearch(e)}>
             <Tag className={styles.Tag} color={tag}>
                 {tag}
             </Tag>
@@ -30,7 +23,7 @@ const TagBox: React.FC<Props> = ({ tags, onTagSearch }) => {
     ));
     return (
         <Skeleton loading={loading} paragraph={{ rows: 0 }} active>
-            <Row className={styles.TagBox}>{testTags}</Row>
+            <Row className={styles.TagBox}>{tag}</Row>
         </Skeleton>
     );
 };
