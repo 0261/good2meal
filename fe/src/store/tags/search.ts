@@ -4,24 +4,19 @@ const TAG_SEARCH = 'tags/search';
 interface TagSearchAction {
     type: typeof TAG_SEARCH;
     payload: {
-        lastKey?: string | number;
-        filter: string;
+        tagName: string;
     };
 }
 
 type Action = TagSearchAction;
 // action creator
 
-interface Search {
-    lastKey?: string | number;
-    filter?: string;
-}
-export const tagSearch = (searchParams: Search) => {
+export const tagSearch = (tagName: string) => {
     return {
         type: TAG_SEARCH,
         payload: {
-            ...searchParams,
-        }
+            tagName,
+        },
     };
 };
 // reducer
@@ -38,15 +33,14 @@ const initState = {
         'blue',
         'geekblue',
         'purple',
-    ]
-}
+    ],
+};
 
 const tagReducer = (state = initState, action: Action) => {
     return produce(state, draft => {
         switch (action.type) {
             case TAG_SEARCH:
-            console.log(action);
-            break;
+                break;
         }
     });
 };

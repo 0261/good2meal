@@ -26,76 +26,10 @@ export const restaurantSearch = (searchParams: Search) => ({
 const initState = {
     restaurants: [
         {
-            imgUrl: 'https://via.placeholder.com/150.png/09f/fff',
-            alt: 'example',
-            title: '테스트',
-            desc: '테스트 카드',
-        },
-        {
-            imgUrl: 'https://via.placeholder.com/150.png/09f/fff',
-            alt: 'example',
-            title: '테스트',
-            desc: '테스트 카드',
-        },
-        {
-            imgUrl: 'https://via.placeholder.com/150.png/09f/fff',
-            alt: 'example',
-            title: '테스트',
-            desc: '테스트 카드',
-        },
-        {
-            imgUrl: 'https://via.placeholder.com/150.png/09f/fff',
-            alt: 'example',
-            title: '테스트',
-            desc: '테스트 카드',
-        },
-        {
-            imgUrl: 'https://via.placeholder.com/150.png/09f/fff',
-            alt: 'example',
-            title: '테스트',
-            desc: '테스트 카드',
-        },
-        {
-            imgUrl: 'https://via.placeholder.com/150.png/09f/fff',
-            alt: 'example',
-            title: '테스트',
-            desc: '테스트 카드',
-        },
-        {
-            imgUrl: 'https://via.placeholder.com/150.png/09f/fff',
-            alt: 'example',
-            title: '테스트',
-            desc: '테스트 카드',
-        },
-        {
-            imgUrl: 'https://via.placeholder.com/150.png/09f/fff',
-            alt: 'example',
-            title: '테스트',
-            desc: '테스트 카드',
-        },
-        {
-            imgUrl: 'https://via.placeholder.com/150.png/09f/fff',
-            alt: 'example',
-            title: '테스트',
-            desc: '테스트 카드',
-        },
-        {
-            imgUrl: 'https://via.placeholder.com/150.png/09f/fff',
-            alt: 'example',
-            title: '테스트',
-            desc: '테스트 카드',
-        },
-        {
-            imgUrl: 'https://via.placeholder.com/150.png/09f/fff',
-            alt: 'example',
-            title: '테스트',
-            desc: '테스트 카드',
-        },
-        {
-            imgUrl: 'https://via.placeholder.com/150.png/09f/fff',
-            alt: 'example',
-            title: '테스트',
-            desc: '테스트 카드',
+            imgUrl: '',
+            title: '',
+            alt: '',
+            desc: '',
         },
     ],
 };
