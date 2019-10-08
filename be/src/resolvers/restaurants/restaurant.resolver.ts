@@ -9,7 +9,9 @@ export class RestaurantResolver {
             return [
                 {
                     location: '구로디지털단지',
+                    display: '1',
                     id: '1',
+                    telDisplay: '1',
                 },
             ];
         } catch (error) {
