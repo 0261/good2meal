@@ -20,14 +20,18 @@ export class RestaurantResolver {
     @Mutation(type => String)
     async createRestaurants(@Arg('data') newRestaurantData: CreateRestaurant) {
         try {
-            const categories = newRestaurantData.category.join('#');
-            const putItem = {};
-            await this.dynamodb.put('restaurant', {
+            const categories = newRestaurantData.category
+                .map(category => category.split(','))
+                .reduce((acc, curr) => acc.concat(curr), [])
+                .join('#');
+
+            const putItem = {
                 ...newRestaurantData,
                 location: newRestaurantData.location,
-                sortKey: `${newRestaurantData.rank}#${categories}`,
-            });
-            return true;
+                sortKey: `${categories}#${newRestaurantData.rank}`,
+            };
+            await this.dynamodb.put('restaurant', putItem);
+            return 'true';
         } catch (error) {
             throw new Error(error);
         }
