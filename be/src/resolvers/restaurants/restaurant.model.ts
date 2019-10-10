@@ -59,7 +59,9 @@ export class CreateRestaurant {
     telDisplay!: string;
 
     @Field({ nullable: true, description: '음식점 주소' })
-    addr?: string;
+    roadAddress?: string;
+    @Field({ nullable: true, description: '음식점 주소' })
+    address?: string;
     @Field({ nullable: true, description: '음식점 영업시간' })
     bizhourInfo?: string;
     @Field(type => [String], {
