@@ -1,12 +1,15 @@
 import { Field, ObjectType, ArgsType, InputType } from 'type-graphql';
-import { Category } from '../categories/category.model';
 
 @ObjectType({ description: '음식점 모델' })
 export class Restaurant {
-    @Field({ description: '파티션 키' })
+    @Field({ description: 'id' })
+    restaurantId!: string;
+
+    @Field({ description: '파티션키' })
     location!: string;
-    @Field({ description: '소트 키 ' })
-    id!: string;
+
+    @Field({ description: '랭크 소트키' })
+    rank!: string;
 
     @Field({ nullable: true, description: '전화번호' })
     tel?: string;
@@ -19,7 +22,9 @@ export class Restaurant {
     telDisplay!: string;
 
     @Field({ nullable: true, description: '음식점 주소' })
-    addr?: string;
+    roadAddress?: string;
+    @Field({ nullable: true, description: '음식점 주소' })
+    address?: string;
     @Field({ nullable: true, description: '음식점 영업시간' })
     bizhourInfo?: string;
     @Field(type => [String], {
@@ -28,10 +33,9 @@ export class Restaurant {
     })
     menuInfo?: Array<string>;
     @Field(type => [String], { nullable: true, description: '음식점 해시태그' })
-    context?: Array<string>;
-
-    @Field(type => [Category], { description: '음식점 카테고리' })
-    category?: Array<Category>;
+    context!: Array<string>;
+    @Field(type => [String], { nullable: true, description: '음식점 카테고리' })
+    category!: Array<string>;
 }
 
 @ArgsType()
