@@ -1,11 +1,13 @@
 import { DocumentClient } from 'aws-sdk/clients/dynamodb';
-import * as expression from '@typemon/dynamodb-expression';
+import { Expression } from '@typemon/dynamodb-expression';
+import { Restaurant } from '../resolvers/restaurants/restaurant.model';
 
 interface Tables {
     restaurant: {
-        location: string;
+        partitionKey: string;
         sortKey: string;
         [key: string]: any;
+        model: Restaurant;
     };
 }
 export class DynamoDB {
@@ -20,9 +22,19 @@ export class DynamoDB {
         });
         DynamoDB.instance = this;
     }
-    public async query() {
+    public async query<K extends keyof Tables>(
+        tableName: K,
+        expression: Expression,
+    ): Promise<DocumentClient.QueryOutput> {
         try {
-            console.log('dynamodb');
+            const queryOption: DocumentClient.QueryInput = {
+                TableName: tableName,
+                KeyConditionExpression: expression.expression,
+                ExpressionAttributeNames: expression.names,
+                ExpressionAttributeValues: expression.values,
+            };
+            const results = await this.client.query(queryOption).promise();
+            return results;
         } catch (error) {
             throw error;
         }
@@ -49,14 +61,20 @@ export class DynamoDB {
         }
     }
 
-    public async put<K extends keyof Tables>(tableName: K, Item: Tables[K]) {
+    public async put<K extends keyof Tables>(
+        tableName: K,
+        partitionKey: Tables[K]['partitionKey'],
+        sortKey: Tables[K]['sortKey'],
+        Item: any,
+    ) {
         try {
-            const putOption = {
+            const putOptions = {
                 TableName: tableName,
-                Item,
+                partitionKey,
+                sortKey,
+                ...Item,
             };
-            console.log(putOption);
-            await this.client.put(putOption).promise();
+            await this.client.put(putOptions).promise();
         } catch (error) {
             throw error;
         }
