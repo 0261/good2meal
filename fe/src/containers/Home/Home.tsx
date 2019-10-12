@@ -61,9 +61,32 @@ const Home: React.FC<Props> = props => {
 
     const onInputSearch = (event: React.KeyboardEvent<HTMLInputElement>) => {
         const input = event.currentTarget.value;
-        props.restaurantSearch({
-            filter: input,
-        });
+        const fetchData = async () => {
+            const result = await axios.post('http://localhost:4000/graphql', {
+                query: `
+                {
+                    GetRestaurants (searchKey: "${input}") {
+                        restaurantId
+                        location
+                        rank
+                        tel
+                        name
+                        display
+                        telDisplay
+                        roadAddress
+                        category
+                        menuInfo
+                        bizhourInfo
+                        context
+                        address
+                        sortKey
+                    }
+                }`,
+            });
+            const { GetRestaurants } = result.data.data;
+            setRestaurants(GetRestaurants);
+        };
+        fetchData();
     };
     const onTagSearch = (
         event: React.MouseEvent<HTMLSpanElement, MouseEvent>,
