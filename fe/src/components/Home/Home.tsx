@@ -12,8 +12,10 @@ import styles from './Home.scss';
 interface Restaurant {
     imgUrl: string;
     alt: string;
-    title: string;
-    desc: string;
+    display: string;
+    tel: string;
+    category: Array<string>;
+    context: Array<string>;
 }
 interface Props {
     loading: boolean;
@@ -43,14 +45,17 @@ const Home: React.FC<Props> = ({
                     avatar
                     active
                 >
-                    <img alt={restaurant.alt} src={restaurant.imgUrl} />
+                    <img
+                        alt={restaurant.alt}
+                        src={'https://via.placeholder.com/150.png/09f/fff'}
+                    />
                 </Skeleton>
             }
         >
             <Skeleton loading={loading} active>
                 <Meta
-                    title={restaurant.title}
-                    description={`${restaurant.desc} ${index + 1}`}
+                    title={restaurant.display}
+                    description={`${restaurant.category}`}
                 />
             </Skeleton>
         </Card>
