@@ -25,13 +25,23 @@ export class DynamoDB {
     public async query<K extends keyof Tables>(
         tableName: K,
         expression: Expression,
+        filterExpression?: Expression,
     ): Promise<DocumentClient.QueryOutput> {
         try {
             const queryOption: DocumentClient.QueryInput = {
                 TableName: tableName,
                 KeyConditionExpression: expression.expression,
-                ExpressionAttributeNames: expression.names,
-                ExpressionAttributeValues: expression.values,
+                ExpressionAttributeNames: Object.assign(
+                    expression.names,
+                    filterExpression ? filterExpression.names : undefined,
+                ),
+                ExpressionAttributeValues: Object.assign(
+                    expression.values,
+                    filterExpression ? filterExpression.values : undefined,
+                ),
+                FilterExpression: filterExpression
+                    ? filterExpression.expression
+                    : undefined,
             };
             const results = await this.client.query(queryOption).promise();
             return results;
