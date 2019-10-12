@@ -10,9 +10,6 @@ const presets = [
     '@babel/typescript',
     '@babel/preset-react',
 ];
-const plugins = [
-    'transform-class-properties'
-];
-
+const plugins = ['transform-class-properties', '@babel/transform-runtime'];
 
 module.exports = { presets, plugins };
