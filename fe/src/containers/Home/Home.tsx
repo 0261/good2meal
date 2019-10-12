@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 import { AppState } from '../../store/modules';
 import { restaurantSearch } from '../../store/restaurants/search';
@@ -14,18 +15,58 @@ interface Search {
 interface Restaurant {
     imgUrl: string;
     alt: string;
-    title: string;
-    desc: string;
+    display: string;
+    tel: string;
+    category: Array<string>;
+    context: Array<string>;
 }
 interface Props {
     tags: Array<string>;
-    restaurants: Array<Restaurant>;
     restaurantSearch: (params: Search) => void;
     tagSearch: (tagName: string) => void;
 }
 
 const Home: React.FC<Props> = props => {
     const [loading, setLoading] = useState(false);
+    const [restaurant, setRestaurants] = useState([]);
+
+    useEffect(() => {
+        new Promise((resolve, reject) => {
+            const result = axios.post('http://localhost:4000/graphql', {
+                query: `
+                {
+                    GetRestaurants {
+                        restaurantId
+                        location
+                        rank
+                        tel
+                        name
+                        display
+                        telDisplay
+                        roadAddress
+                        category
+                        menuInfo
+                        bizhourInfo
+                        context
+                        address
+                        sortKey
+                    }
+                }`,
+            });
+            return resolve(result);
+        })
+            .then((result: any) => {
+                const { GetRestaurants } = result.data.data;
+                setRestaurants(GetRestaurants);
+            })
+            .catch(err => {
+                console.log(err);
+            });
+        return () => {
+            console.log('unmount');
+        };
+    }, []);
+
     const onInputSearch = (event: React.KeyboardEvent<HTMLInputElement>) => {
         const input = event.currentTarget.value;
         props.restaurantSearch({
@@ -41,7 +82,7 @@ const Home: React.FC<Props> = props => {
     return (
         <HomeComponent
             onSearch={onInputSearch}
-            restaurants={props.restaurants}
+            restaurants={restaurant}
             tags={props.tags}
             onTagSearch={onTagSearch}
             loading={loading}
@@ -52,7 +93,6 @@ const Home: React.FC<Props> = props => {
 
 const mapStateToProps = (state: AppState) => ({
     tags: state.tag.tags,
-    restaurants: state.restaurant.restaurants,
 });
 const mapDispatchToProps = (dispatch: Dispatch) => ({
     restaurantSearch: (params: Search) => dispatch(restaurantSearch(params)),
