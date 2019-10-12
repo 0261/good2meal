@@ -1,6 +1,10 @@
 import { Resolver, Query, Arg, Args, Mutation } from 'type-graphql';
-import { Restaurant, CreateRestaurant } from './restaurant.model';
-import { Expression, equal } from '@typemon/dynamodb-expression';
+import {
+    Restaurant,
+    CreateRestaurant,
+    QueryRestaurant,
+} from './restaurant.model';
+import { equal, Expression, contains, or } from '@typemon/dynamodb-expression';
 import { DynamoDB } from '../../services/dynamodb';
 
 @Resolver()
@@ -10,12 +14,27 @@ export class RestaurantResolver {
         description: '음식점 검색',
         name: 'GetRestaurants',
     })
-    async getRestaurants(): Promise<Array<Restaurant>> {
+    async getRestaurants(
+        @Arg('searchKey', {
+            description: '음식점명 또는 카테고리',
+            nullable: true,
+        })
+        searchKey?: string,
+    ): Promise<Array<Restaurant>> {
+        let filterExpression;
         try {
+            if (searchKey) {
+                filterExpression = contains('display', searchKey);
+            }
             const expression = equal('location', '구로디지털단지');
-            const results = await this.dynamodb.query('restaurant', expression);
+            const results = await this.dynamodb.query(
+                'restaurant',
+                expression,
+                filterExpression,
+            );
             const restaurants = results.Items as Array<Restaurant>;
             const total = results.ScannedCount;
+            // LastEvaluatedKey를 이용한 인피니티스크롤 추가
             return restaurants;
         } catch (error) {
             throw new Error(error);
