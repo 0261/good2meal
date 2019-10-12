@@ -31,8 +31,8 @@ const Home: React.FC<Props> = props => {
     const [restaurant, setRestaurants] = useState([]);
 
     useEffect(() => {
-        new Promise((resolve, reject) => {
-            const result = axios.post('http://localhost:4000/graphql', {
+        const fetchData = async () => {
+            const result = await axios.post('http://localhost:4000/graphql', {
                 query: `
                 {
                     GetRestaurants {
@@ -53,18 +53,10 @@ const Home: React.FC<Props> = props => {
                     }
                 }`,
             });
-            return resolve(result);
-        })
-            .then((result: any) => {
-                const { GetRestaurants } = result.data.data;
-                setRestaurants(GetRestaurants);
-            })
-            .catch(err => {
-                console.log(err);
-            });
-        return () => {
-            console.log('unmount');
+            const { GetRestaurants } = result.data.data;
+            setRestaurants(GetRestaurants);
         };
+        fetchData();
     }, []);
 
     const onInputSearch = (event: React.KeyboardEvent<HTMLInputElement>) => {
