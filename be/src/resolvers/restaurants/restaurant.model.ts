@@ -8,8 +8,11 @@ export class Restaurant {
     @Field({ description: '파티션키' })
     location!: string;
 
-    @Field({ description: '랭크 소트키' })
+    @Field({ description: '랭크' })
     rank!: string;
+
+    @Field({ description: '소트키' })
+    sortKey!: string;
 
     @Field({ nullable: true, description: '전화번호' })
     tel?: string;
