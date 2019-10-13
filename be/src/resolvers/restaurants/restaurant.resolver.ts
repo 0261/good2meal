@@ -52,12 +52,13 @@ export class RestaurantResolver {
             await this.dynamodb.put(
                 'restaurant',
                 newRestaurantData.location,
-                `${categories}#${newRestaurantData.rank}`,
+                `${newRestaurantData.rank}#${categories}`,
                 newRestaurantData,
             );
 
             return 'true';
         } catch (error) {
+            console.log(error);
             throw new Error(error);
         }
     }
