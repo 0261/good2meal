@@ -14,6 +14,9 @@ export class Restaurant {
     @Field({ description: '소트키' })
     sortKey!: string;
 
+    @Field({ description: '' })
+    thumbUrl!: string;
+
     @Field({ nullable: true, description: '전화번호' })
     tel?: string;
     @Field({ nullable: true, description: '음식점 이름' })
@@ -64,6 +67,9 @@ export class CreateRestaurant {
     display!: string;
     @Field({ description: '보여질 음식점 전화번호' })
     telDisplay!: string;
+
+    @Field({ description: '' })
+    thumbUrl!: string;
 
     @Field({ nullable: true, description: '음식점 주소' })
     roadAddress?: string;
