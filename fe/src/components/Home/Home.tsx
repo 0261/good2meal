@@ -13,6 +13,7 @@ interface Restaurant {
     imgUrl: string;
     alt: string;
     display: string;
+    thumbUrl: string;
     tel: string;
     category: Array<string>;
     context: Array<string>;
@@ -45,10 +46,7 @@ const Home: React.FC<Props> = ({
                     avatar
                     active
                 >
-                    <img
-                        alt={restaurant.alt}
-                        src={'https://via.placeholder.com/150.png/09f/fff'}
-                    />
+                    <img alt={restaurant.alt} src={restaurant.thumbUrl} />
                 </Skeleton>
             }
         >
