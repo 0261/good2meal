@@ -42,6 +42,7 @@ export class DynamoDB {
                 FilterExpression: filterExpression
                     ? filterExpression.expression
                     : undefined,
+                Limit: 15,
             };
             const results = await this.client.query(queryOption).promise();
             return results;
@@ -78,14 +79,17 @@ export class DynamoDB {
         Item: any,
     ) {
         try {
-            const putOptions = {
+            const putOptions: DocumentClient.PutItemInput = {
                 TableName: tableName,
-                partitionKey,
-                sortKey,
-                ...Item,
+                Item: {
+                    location: partitionKey,
+                    sortKey,
+                    ...Item,
+                },
             };
             await this.client.put(putOptions).promise();
         } catch (error) {
+            console.log(error);
             throw error;
         }
     }
