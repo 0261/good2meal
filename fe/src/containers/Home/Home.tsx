@@ -38,6 +38,7 @@ const Home: React.FC<Props> = props => {
                     GetRestaurants {
                         restaurantId
                         location
+                        thumbUrl
                         rank
                         tel
                         name
@@ -77,6 +78,7 @@ const Home: React.FC<Props> = props => {
                         category
                         menuInfo
                         bizhourInfo
+                        thumbUrl
                         context
                         address
                         sortKey
